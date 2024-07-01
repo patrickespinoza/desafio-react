@@ -17,7 +17,6 @@ export default function HomeTags () {
             </div>
             <div className="space-y-2 mb-8">
               <p>&#127968; Home</p>
-              <p>&#127968; Home</p>
               <p>&#127908; Podcast</p>
               <p>&#128219; Tags</p>
               <p>&#128161; Dev Help</p>

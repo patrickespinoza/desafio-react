@@ -41,3 +41,14 @@ export async function createAccount(email, password, name) {
   console.log("Respuesta completa de la API:", json);
   return json;
 }
+
+async function createPost(title, text) {
+  const newPost = new Post({ title, text });
+  try {
+    const savedPost = await newPost.save();
+    return savedPost;
+  } catch (error) {
+    console.error("Error creating post:", error);
+    throw error;
+  }
+}
