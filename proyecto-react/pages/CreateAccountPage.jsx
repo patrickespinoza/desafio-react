@@ -1,4 +1,24 @@
-export default function CreateAccountPage () {
+import React, { useState } from 'react';
+import { createAccount } from './api/Api';
+
+const CreateAccountPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await createAccount(email, password, name);
+      console.log('Account created successfully:', token);
+      
+    } catch (error) {
+      console.error('Error creating account:', error);
+      
+    }
+  };
+
+
 
     return (
         <main className="flex justify-center items-center flex-col min-h-screen">
@@ -41,31 +61,54 @@ export default function CreateAccountPage () {
             <div>
                 <p>OR</p>
             </div>
-        <div className="flex flex-col items-center gap-4 w-96 lg:w-1/3 md:w-1/2 sm:w-96">
+    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-96 lg:w-1/3 md:w-1/2 sm:w-96">
+    <div className="flex flex-col w-full mb-4">
+          <span className="mb-1">Name</span>
+          <input
+            className="border border-gray-400 px-2 py-1"
+            type="text"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col w-full mb-4">
+          <span className="mb-1">Email</span>
+          <input
+            className="border border-gray-400 px-2 py-1"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className="flex flex-col w-full mb-4">
+          <span className="mb-1">Password</span>
+          <input
+            className="border border-gray-400 px-2 py-1"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <div className="flex items-center justify-between w-full mb-4">
+          <label className="flex items-center w-full">
+            <input className="mr-2 text-2xl" type="checkbox" />Remember me
+            <p className="ml-auto text-[#1d4ed8]">Forgot password?</p>
+          </label>
+        </div>
+        <div className="flex items-center flex-col justify-between w-full">
+          <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 w-full mb-8" type="submit">
+            Create Account
+          </button>
+          <p className="ml-4 text-sm">By signing in, you are agreeing to our privacy policy, terms of use and code of conduct.</p>
+        </div>
+        <div className="mt-4">
+          <p>New to DEV Community? Create account.</p>
+        </div>
+      </form>
 
-            <div className=" flex flex-col w-full mb-4">
-               <span className="mb-1">Email</span>
-               <input className="border border-gray-400 px-2 py-1" type="text" />
-            </div>
-            <div className=" flex flex-col w-full mb-4">
-                <span className="mb-1">Paswword</span>
-                <input className="border border-gray-400 px-2 py-1" type="password" />
-            </div>
-            <div className="flex items-center justify-between w-full">
-                <label className="flex items-center w-full">
-                   <input className="mr-2 text-2xl" type="checkbox" />Remember me
-                   <p className="ml-auto text-[#1d4ed8]">Forgot password?</p>
-                </label>
-            </div>
-            <div className="flex items-center flex-col justify-between">
-                <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 w-full mb-8" >Create Account</button>
-                <p className="ml-4 text-sm">By signing in, you are agreeing to our privacy policy, terms of use and code of conduct.</p>
-            </div>
-            <div className="mt-4">
-                <p>New to DEV Community? Create account.</p>
-            </div>
-         </div>
 
         </main>
     )
 }
+
+export default CreateAccountPage
