@@ -1,36 +1,42 @@
 import React, { useState } from 'react';
-import { createAccount } from './api/Api';
+import { login } from './api/Api';
 import { useRouter } from 'next/router';
 
-const CreateAccountPage = () => {
-  const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [name, setName] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const response = await createAccount(email, password, name);
-      console.log('Response from API:', response);
-      
-      const token = response?.data?.token;
-      if (token) {
-        localStorage.setItem('token', token);
-        console.log('Token guardado en localStorage.');
-        router.push('/');
-      } else {
-        console.error('El token recibido es inválido o está vacío.');
+const LoginPage = () => {
+    const router = useRouter();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+   
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      try {
+       
+        const response = await login(email, password);
+        console.log('Response from API:', response);
+    
+       
+        if (response && response.data && response.data.token) {
+          const token = response.data.token;
+          
+          
+          localStorage.setItem('token', token);
+          console.log('Token guardado en localStorage.');
+          
+         
+          router.push('/');
+        } else {
+          console.error('El token recibido es inválido o está vacío.');
+        }
+    
+        
+        setEmail('');
+        setPassword('');
+    
+      } catch (error) {
+        console.error('Error during login:', error);
       }
-  
-      setName('');
-      setEmail('');
-      setPassword('');
-  
-    } catch (error) {
-      console.error('Error creating account:', error);
-    }
-  };
+    };
   
     return (
         <main className="flex justify-center items-center flex-col min-h-screen">
@@ -74,15 +80,6 @@ const CreateAccountPage = () => {
                 <p>OR</p>
             </div>
     <form onSubmit={handleSubmit} className="flex flex-col items-center gap-4 w-96 lg:w-1/3 md:w-1/2 sm:w-96">
-    <div className="flex flex-col w-full mb-4">
-          <span className="mb-1">Name</span>
-          <input
-            className="border border-gray-400 px-2 py-1"
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
         <div className="flex flex-col w-full mb-4">
           <span className="mb-1">Email</span>
           <input
@@ -109,7 +106,7 @@ const CreateAccountPage = () => {
         </div>
         <div className="flex items-center flex-col justify-between w-full">
           <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500 w-full mb-8" type="submit">
-            Create Account
+            Log in
           </button>
           <p className="ml-4 text-sm">By signing in, you are agreeing to our privacy policy, terms of use and code of conduct.</p>
         </div>
@@ -123,4 +120,4 @@ const CreateAccountPage = () => {
     )
 }
 
-export default CreateAccountPage
+export default LoginPage
