@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function HomeTags () {
     return (
         <main className="container mx-auto px-4 py-8">
@@ -5,9 +7,13 @@ export default function HomeTags () {
                <h2 className="text-2xl font-bold">DEV Community is a community of 1,681,640 amazing developers</h2>
                <p>We're a place where coders share, stay up-to-date and grow their careers.</p>
             </div>
-            <div className="flex space-x-4 mb-8">
-                <button className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">Create account</button>
-                <button className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100">Log in</button>
+            <div className="flex flex-col space-y-2 mb-8">
+                <Link href="/CreateAccountPage">
+                <button className="px-2 py-1 rounded border border-[#1d4ed8] text-[#1d4ed8] hover:bg-[#1d4ed8] hover:text-white">Create account</button>
+                </Link>
+                <Link href="/CreateAccountPage">
+                <button className="px-2 py-1 border rounded hover:text-[#1d4ed8] hover:underline">Log in</button>
+                </Link>
             </div>
             <div className="space-y-2 mb-8">
                 <p>🏠 Home</p>

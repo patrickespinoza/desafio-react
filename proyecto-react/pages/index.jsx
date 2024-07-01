@@ -1,6 +1,8 @@
+import Link from "next/link"
 import HomeTags from "@/components/Home/hometags"
 import HomePrincipal from "@/components/Home/homeprincipal"
 import HomeIcons from "@/components/Home/homeicons"
+
 
 export default function Home () {
   return  (
@@ -13,8 +15,13 @@ export default function Home () {
            <input className="w-1/2 mx-4" type="search" placeholder=" 🔎 Search..."/>
         </div>
         <div className="flex space-x-4 items-center">
-          <button>Create Post</button>
-          <button>Login</button>
+          <Link href="/CreateAccountPage">
+
+          <button className="hover:text-[#1d4ed8] hover:underline">Login</button>
+          </Link>
+          <Link href="/CreateAccountPage">
+          <button className="px-4 py-2 border text-[#1d4ed8] border-[#1d4ed8] rounded hover:bg-[#1d4ed8] hover:text-white">Create account</button>
+          </Link>
         </div>
       </nav>
       <div className="flex flex-wrap">
