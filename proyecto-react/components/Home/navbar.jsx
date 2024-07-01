@@ -27,7 +27,7 @@ return (
 <div className="flex space-x-4 items-center">
   {isLoggedIn ? (
     <>
-      <Link href="/create-post">
+      <Link href="/CreatePost">
         <button className="px-4 py-2 border text-[#1d4ed8] border-[#1d4ed8] rounded hover:bg-[#1d4ed8] hover:text-white">Create Post</button>
       </Link>
       <div>
