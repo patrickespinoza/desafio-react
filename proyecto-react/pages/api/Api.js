@@ -42,13 +42,42 @@ export async function createAccount(email, password, name) {
   return json;
 }
 
-async function createPost(title, text) {
-  const newPost = new Post({ title, text });
+export async function createPost(postData) {
+  const response = await fetch(`${API_URL}/post`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(postData),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message);
+  }
+
+  return await response.json();
+}
+
+export async function getPost() {
   try {
-    const savedPost = await newPost.save();
-    return savedPost;
+    const response = await fetch(`${API_URL}/post`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+
+    const data = await response.json();
+    console.log("Data received from API:", data);
+    return data.data.postAll;
   } catch (error) {
-    console.error("Error creating post:", error);
+    console.error("Error fetching posts:", error);
     throw error;
   }
 }
