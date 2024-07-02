@@ -11,7 +11,7 @@ export default function HomeTags () {
                 <Link href="/CreateAccountPage">
                 <button className="px-2 py-1 rounded border border-[#1d4ed8] text-[#1d4ed8] hover:bg-[#1d4ed8] hover:text-white">Create account</button>
                 </Link>
-                <Link href="/CreateAccountPage">
+                <Link href="/LoginPage">
                 <button className="px-2 py-1 border rounded hover:text-[#1d4ed8] hover:underline">Log in</button>
                 </Link>
             </div>
