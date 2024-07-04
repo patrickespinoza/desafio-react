@@ -75,9 +75,23 @@ export async function getPost() {
 
     const data = await response.json();
     console.log("Data received from API:", data);
-    return data.data.postAll;
+    return data.data;
   } catch (error) {
     console.error("Error fetching posts:", error);
+    throw error;
+  }
+}
+
+export async function getPostById(id) {
+  try {
+    const response = await fetch(`${API_URL}/post/${id}`);
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data.data;
+  } catch (error) {
+    console.error("Failed to fetch post:", error);
     throw error;
   }
 }
