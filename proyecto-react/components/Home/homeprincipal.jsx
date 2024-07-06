@@ -48,19 +48,25 @@ export default function HomePrincipal() {
             <p>No posts available</p>
           ) : (
             posts.map((post) => (
-              <div key={post._id} className="col-md-12 mb-4 border border-blue-500">
+              <div key={post._id} className="col-md-12 mb-4 border">
                 <div className="card">
                   <div className="card-body">
                     {post.image && <img src={post.image} alt="Post Image" className="mb-4" />}
+                    <p>{new Date(post.createdate).toLocaleDateString()}</p>
                     <h2 className="card-title">
                       <Link href={`/${post._id}`}>
-                        <span>detail</span>
+                    <h3 className="card-subtitle mb-2 text-muted font-bold text-2xl hover:text-blue-700">{post.title}</h3>
+                        
                       </Link>
                     </h2>
-                    <p>{new Date(post.createdate).toLocaleDateString()}</p>
-                    <h3 className="card-subtitle mb-2 text-muted font-bold text-2xl">{post.title}</h3>
-                    <p className="card-text">{post.body}</p>
-                    <p>Author: {post.user?.name || 'Unknown'}</p>
+                    <div className='flex flex-row p-4'>
+                    <p>&#128588; &#128150; &#129327; &#128293; </p>
+                    
+                    <p>10 Reactions</p>
+                    <p className='px-5'> 	&#128172; 4 comment </p>
+                    <p className='px-5'> 3 min read</p>
+
+                    </div>
                   </div>
                 </div>
               </div>
